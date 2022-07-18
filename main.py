@@ -2,7 +2,7 @@
 #Use an IDE on your local computer with graphics
 
 from PyQt6.QtWidgets import QApplication,QWidget,QVBoxLayout
-from PyQt6.QtWidgets import QLabel,QPushButton,QLineEdit
+from PyQt6.QtWidgets import QLabel,QPushButton,QLineEdit,QComboBox
 from bs4 import BeautifulSoup
 import requests
 
@@ -16,7 +16,9 @@ def get_currency(in_currency='USD', out_currency='EUR'):
 
 def show_currency():
   input_text=text.text()
-  rate=get_currency
+  in_cur=in_combo.currentText()
+  tgt_cur=tgt_combo.currentText()
+  rate=get_currency(in_cur,tgt_cur)
   output=round(float(input_text) * rate, 2)
   output_label.setText(str(output))
 
@@ -25,6 +27,15 @@ window=QWidget()
 window.setWindowTitle('Currency Converter')
 
 layout=QVBoxLayout()
+currencies=['USD','EUR','GBP','INR']
+
+in_combo=qComboBox()
+in_combo.addItems(currencies)
+layout.addWidget(in_combo)
+
+tgt_combo=qComboBox()
+tgt_combo.addItems(currencies)
+layout.addWidget(tgt_combo)
 
 text=QLineEdit()
 layout.addWidget(text)
