@@ -20,7 +20,8 @@ def show_currency():
   tgt_cur=tgt_combo.currentText()
   rate=get_currency(in_cur,tgt_cur)
   output=round(float(input_text) * rate, 2)
-  output_label.setText(str(output))
+  message= f'{input_text} {in_cur} is {output} {tgt_cur}'
+  output_label.setText(str(message))
 
 app=QApplication([])
 window=QWidget()
